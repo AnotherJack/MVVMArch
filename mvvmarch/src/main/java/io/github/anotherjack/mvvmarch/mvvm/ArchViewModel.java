@@ -13,7 +13,9 @@ public abstract class ArchViewModel<M extends IArchModel,L extends Lifecycle> ex
     protected M mModel;
     protected L mLifecycle;
 
-    public ArchViewModel(@NonNull Application application) {
+    public ArchViewModel(@NonNull Application application, M mModel, L mLifecycle) {
         super(application);
+        this.mModel = mModel;
+        this.mLifecycle = mLifecycle;
     }
 }
