@@ -1,5 +1,6 @@
 package io.github.anotherjack.mvvmarch.mvvm;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -21,8 +22,9 @@ public abstract class ArchFragment<B extends ViewDataBinding,VM extends ArchView
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater,getLayoutId(),container,false);
+        executeInject();
+        mViewModel = ViewModelProviders.of(this,new ViewModelInstanceFactory<VM>(mViewModel)).get(getViewModelClazz());
         return mBinding.getRoot();
     }
 
-    protected abstract int getLayoutId();
 }
