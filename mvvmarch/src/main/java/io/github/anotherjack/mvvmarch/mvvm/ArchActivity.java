@@ -1,6 +1,5 @@
 package io.github.anotherjack.mvvmarch.mvvm;
 
-import android.arch.lifecycle.LifecycleOwner;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -12,7 +11,7 @@ import android.support.v7.app.AppCompatActivity;
  * Created by jack on 2018/1/31.
  */
 
-public abstract class ArchActivity<B extends ViewDataBinding,VM extends IViewModel> extends AppCompatActivity implements IView,LifecycleOwner {
+public abstract class ArchActivity<B extends ViewDataBinding,VM extends ArchViewModel> extends AppCompatActivity implements IArchView<B,VM> {
     protected B mBinding;
     private VM mViewModel;
 

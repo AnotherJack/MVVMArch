@@ -1,6 +1,5 @@
 package io.github.anotherjack.mvvmarch.mvvm;
 
-import android.arch.lifecycle.LifecycleOwner;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -14,7 +13,7 @@ import android.view.ViewGroup;
  * Created by jack on 2018/1/31.
  */
 
-public abstract class ArchFragment<B extends ViewDataBinding,VM extends IViewModel> extends Fragment implements IView,LifecycleOwner {
+public abstract class ArchFragment<B extends ViewDataBinding,VM extends ArchViewModel> extends Fragment implements IArchView<B,VM> {
     protected B mBinding;
     protected VM mViewModel;
 
