@@ -3,16 +3,16 @@ package io.github.anotherjack.mvvmarch.mvvm;
 import android.arch.lifecycle.LifecycleOwner;
 import android.databinding.ViewDataBinding;
 
-import io.github.anotherjack.mvvmarch.di.component.IComponent;
 
 /**
  * Created by zhengj on 2018-2-1.
  */
 
-public interface IArchView<B extends ViewDataBinding, VM extends ArchViewModel, C extends IComponent, DC extends IComponent> extends IView, LifecycleOwner {
+//C为Component，DC为DependencyComponent
+public interface IArchView<B extends ViewDataBinding, VM extends ArchViewModel, C, DC> extends IView, LifecycleOwner {
 
     /**
-     * 获取布局id
+     * 获取Activity或Fragment布局id
      *
      * @return
      */
@@ -26,31 +26,34 @@ public interface IArchView<B extends ViewDataBinding, VM extends ArchViewModel, 
     Class<? extends VM> getViewModelClazz();
 
     /**
-     * 在此方法中执行Dagger inject
-     */
-    void executeInject(C component);
-
-    /**
-     * build此View对应的dagger component
+     * build此View对应的dagger component，并返回
+     * 不要主动调用此方法，如果需要获得component，请使用getComponent
+     * <p>
+     * DaggerXXXX.build()
      *
-     * component = DaggerXXXX.build()
      * @return
      */
-    void buildComponent(C mComponent, DC dependencyComponent);
+    C buildComponent(DC dependencyComponent);
+
+    /**
+     * 在此方法中执行Dagger inject
+     */
+    void executeInject(C mComponent);
 
     /**
      * 获取此View对应的dagger component
+     *
      * @return
      */
     C getComponent();
 
     /**
      * 获取此View依赖的component
-     * activity依赖的为IAppComponent
-     * activity中的fragment，依赖的为IActivityComponent
-     * 嵌套在fragment中的fragment，依赖的为IFragmentComponent
-     *
+     * 例子中activity依赖的为ActivityComponent
+     * fragment依赖的为FragmentComponent
+     * <p>
      * 此方法通常只需要在基类中实现即可
+     *
      * @return
      */
     DC getDependencyComponent();
