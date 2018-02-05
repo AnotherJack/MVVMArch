@@ -1,6 +1,5 @@
 package io.github.anotherjack.mvvmarchdemo.mvvm.viewmodel
 
-import android.app.Application
 import io.github.anotherjack.mvvmarch.di.scope.PerActivity
 import io.github.anotherjack.mvvmarch.mvvm.ArchViewModel
 import io.github.anotherjack.mvvmarchdemo.mvvm.model.UserModel
@@ -11,6 +10,6 @@ import javax.inject.Inject
  */
 @PerActivity
 class UserViewModel @Inject
-constructor(application: Application, mModel: UserModel) : ArchViewModel<UserModel>(application, mModel) {
+constructor(mModel: UserModel) : ArchViewModel<UserModel>(mModel) {
     var testStr = "qwerasd"
 }

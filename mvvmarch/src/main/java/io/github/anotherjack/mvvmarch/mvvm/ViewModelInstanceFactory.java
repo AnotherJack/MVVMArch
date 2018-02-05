@@ -6,7 +6,6 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
 /**
- * 通过构造器传入viewModel，再在create方法中将其返回，目的只是为了通过factory创建viewModel，使其可感知对应生命周期
  * Created by jack on 2018/2/1.
  */
 
