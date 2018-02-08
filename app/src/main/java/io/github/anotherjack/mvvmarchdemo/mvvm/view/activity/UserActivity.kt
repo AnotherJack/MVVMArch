@@ -26,11 +26,12 @@ class UserActivity : BaseActivity<ActivityUserBinding,UserViewModel, UserCompone
 
         Handler().postDelayed({
             toast("change")
-            mViewModel.user.value = User("ccc",20,"Shanghai")
+//            mViewModel.user.value = User("ccc",20,"Shanghai")
 
-//            mViewModel.user.value?.name = "ccc"
-//            mViewModel.user.value?.age = 20
-//            mViewModel.user.value?.address = "Shanghai"
+            mViewModel.user.value?.name = "ccc"
+            mViewModel.user.value?.age = 20
+            mViewModel.user.value?.address = "Shanghai"
+            mBinding.invalidateAll()
         },5000)
     }
 

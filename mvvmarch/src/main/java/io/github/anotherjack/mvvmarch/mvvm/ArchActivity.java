@@ -32,6 +32,8 @@ public abstract class ArchActivity<B extends ViewDataBinding, VM extends ArchVie
         super.onCreate(savedInstanceState);
         //data binding
         mBinding = DataBindingUtil.setContentView(this, getLayoutId());
+        //要使用livedata，需要设置lifecycle owner
+        mBinding.setLifecycleOwner(this);
 
         //build dagger component
         mComponent = buildComponent(getDependencyComponent());
