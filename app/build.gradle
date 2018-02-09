@@ -25,37 +25,37 @@ android {
     dataBinding {
         enabled = true
     }
-    kapt {
-        generateStubs = true
-    }
+//    kapt {
+//        generateStubs = true
+//    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    compile "org.jetbrains.anko:anko-common:0.8.2"
+    implementation "org.jetbrains.anko:anko-common:0.8.2"
     implementation 'com.android.support:appcompat-v7:27.0.2'
     implementation 'com.android.support:support-v4:27.0.2'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile project(path: ':mvvmarch')
+    implementation project(path: ':mvvmarch')
 
-    compile "android.arch.lifecycle:extensions:1.1.0"
-    compile 'com.google.dagger:dagger:2.14.1'
+    implementation "android.arch.lifecycle:extensions:1.1.0"
+    implementation 'com.google.dagger:dagger:2.14.1'
 //    annotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
     kapt "com.google.dagger:dagger-compiler:2.14.1"
 
-    compile 'com.github.bumptech.glide:glide:4.5.0'
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.google.code.gson:gson:2.8.2'
-    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
-    compile 'com.facebook.stetho:stetho:1.5.0'
-    compile 'com.github.chrisbanes:PhotoView:2.0.0'
-    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
-    compile 'io.reactivex.rxjava2:rxjava:2.1.8'
+    implementation 'com.github.bumptech.glide:glide:4.5.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.8'
 
 //    kapt 'com.android.databinding:compiler:3.0.1'
 }

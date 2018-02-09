@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.google.gson.Gson
 import io.github.anotherjack.mvvmarchdemo.R
+import io.github.anotherjack.mvvmarchdemo.app.extension.notifyChange
 import io.github.anotherjack.mvvmarchdemo.databinding.ActivityUserBinding
 import io.github.anotherjack.mvvmarchdemo.di.component.ActivityComponent
 import io.github.anotherjack.mvvmarchdemo.di.component.DaggerUserComponent
@@ -31,7 +32,7 @@ class UserActivity : BaseActivity<ActivityUserBinding,UserViewModel, UserCompone
             mViewModel.user.value?.name = "ccc"
             mViewModel.user.value?.age = 20
             mViewModel.user.value?.address = "Shanghai"
-            mBinding.invalidateAll()
+            mViewModel.user.notifyChange()
         },5000)
     }
 
