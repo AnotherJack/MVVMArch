@@ -9,7 +9,7 @@ import android.databinding.ViewDataBinding;
  */
 
 //C为Component，DC为DependencyComponent
-public interface IArchView<B extends ViewDataBinding, VM extends ArchViewModel, C, DC> extends IView, LifecycleOwner {
+public interface IArchView<B extends ViewDataBinding, VM extends ArchViewModel, C> extends IView, LifecycleOwner {
 
     /**
      * 获取Activity或Fragment布局id
@@ -33,7 +33,7 @@ public interface IArchView<B extends ViewDataBinding, VM extends ArchViewModel, 
      *
      * @return
      */
-    C buildComponent(DC dependencyComponent);
+    C buildComponent();
 
     /**
      * 在此方法中执行Dagger inject
@@ -47,14 +47,4 @@ public interface IArchView<B extends ViewDataBinding, VM extends ArchViewModel, 
      */
     C getComponent();
 
-    /**
-     * 获取此View依赖的component
-     * 例子中activity依赖的为ActivityComponent
-     * fragment依赖的为FragmentComponent
-     * <p>
-     * 此方法通常只需要在基类中实现即可
-     *
-     * @return
-     */
-    DC getDependencyComponent();
 }

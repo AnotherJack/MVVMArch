@@ -2,7 +2,6 @@ package io.github.anotherjack.mvvmarchdemo.mvvm.model;
 
 import javax.inject.Inject;
 
-import io.github.anotherjack.mvvmarch.di.scope.ActivityScope;
 import io.github.anotherjack.mvvmarch.di.scope.PerActivity;
 import io.github.anotherjack.mvvmarch.mvvm.IArchModel;
 
@@ -13,5 +12,9 @@ import io.github.anotherjack.mvvmarch.mvvm.IArchModel;
 public class UserModel implements IArchModel{
     @Inject
     public UserModel() {
+    }
+
+    public String getSomeData(){
+        return "Some data!";
     }
 }

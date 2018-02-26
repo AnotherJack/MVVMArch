@@ -17,7 +17,7 @@ import javax.inject.Inject;
  * Created by jack on 2018/1/31.
  */
 
-public abstract class ArchFragment<B extends ViewDataBinding, VM extends ArchViewModel, C, DC> extends Fragment implements IArchView<B, VM, C, DC> {
+public abstract class ArchFragment<B extends ViewDataBinding, VM extends ArchViewModel, C> extends Fragment implements IArchView<B, VM, C> {
     protected B mBinding;
     @Inject
     protected VM mViewModel;
@@ -34,7 +34,7 @@ public abstract class ArchFragment<B extends ViewDataBinding, VM extends ArchVie
         mBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
 
         //build dagger component
-        mComponent = buildComponent(getDependencyComponent());
+        mComponent = buildComponent();
 
         //用mComponent执行inject操作
         executeInject(mComponent);

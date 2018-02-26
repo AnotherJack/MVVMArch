@@ -8,27 +8,28 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import dagger.Module;
 import dagger.Provides;
-import io.github.anotherjack.mvvmarch.di.scope.ActivityScope;
+import io.github.anotherjack.mvvmarch.di.scope.PerActivity;
 
 /**
+ * 存储activity中通用的东西
  * Created by jack on 2018/2/3.
  */
 
 @Module
-public class ActivityModule {
+public class CommonActivityModule {
     private Activity activity;
 
-    public ActivityModule(Activity activity) {
+    public CommonActivityModule(Activity activity) {
         this.activity = activity;
     }
 
-    @ActivityScope
+    @PerActivity
     @Provides
     public RxPermissions provideRxPermissions(){
         return new RxPermissions(activity);
     }
 
-    @ActivityScope
+    @PerActivity
     @Provides
     public RequestManager provideRequestManager(){
         return Glide.with(activity);

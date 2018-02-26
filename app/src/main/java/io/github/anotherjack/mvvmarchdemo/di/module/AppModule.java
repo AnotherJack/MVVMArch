@@ -1,6 +1,7 @@
 package io.github.anotherjack.mvvmarchdemo.di.module;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -32,6 +33,7 @@ public class AppModule {
     @Singleton
     @Provides
     public Gson provideGson(){
+        Log.d("---------------------"," provide gson -------------------");
         return new Gson();
     }
 
