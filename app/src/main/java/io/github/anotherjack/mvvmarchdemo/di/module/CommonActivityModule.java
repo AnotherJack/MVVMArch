@@ -40,4 +40,18 @@ public class CommonActivityModule {
     public Activity provideActivity(){
         return activity;
     }
+
+    @PerActivity
+    @Provides
+    public ActivityHolder provideActivityHolder(){
+        return new ActivityHolder(activity);
+    }
+
+    public static class ActivityHolder{
+        Activity activity;
+
+        public ActivityHolder(Activity activity) {
+            this.activity = activity;
+        }
+    }
 }

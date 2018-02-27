@@ -8,11 +8,13 @@ import android.arch.lifecycle.OnLifecycleEvent
 import android.os.Handler
 import android.util.Log
 import android.view.View
+import com.bumptech.glide.RequestManager
 import com.google.gson.Gson
 import com.tbruyelle.rxpermissions2.RxPermissions
 import io.github.anotherjack.mvvmarch.di.scope.PerActivity
 import io.github.anotherjack.mvvmarch.mvvm.ArchViewModel
 import io.github.anotherjack.mvvmarchdemo.app.extension.notifyChange
+import io.github.anotherjack.mvvmarchdemo.di.module.CommonActivityModule
 import io.github.anotherjack.mvvmarchdemo.mvvm.model.UserModel
 import io.github.anotherjack.mvvmarchdemo.mvvm.model.entity.User
 import org.jetbrains.anko.toast
@@ -36,7 +38,10 @@ constructor(mModel: UserModel) : ArchViewModel<UserModel>(mModel) {
     lateinit var rxPermissions:RxPermissions
 
     @Inject
-    lateinit var activity:Activity
+    lateinit var requestManager:RequestManager
+
+    @Inject
+    lateinit var activityHolder:CommonActivityModule.ActivityHolder
 
     init {
         Log.d("userViewModel ","---------------- init "+this.toString())
