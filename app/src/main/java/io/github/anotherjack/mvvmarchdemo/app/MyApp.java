@@ -2,6 +2,8 @@ package io.github.anotherjack.mvvmarchdemo.app;
 
 import android.app.Application;
 
+import com.squareup.leakcanary.LeakCanary;
+
 import io.github.anotherjack.mvvmarchdemo.di.component.AppComponent;
 import io.github.anotherjack.mvvmarchdemo.di.component.DaggerAppComponent;
 import io.github.anotherjack.mvvmarchdemo.di.module.AppModule;
@@ -17,6 +19,13 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
+
         instance = this;
         appComponent = DaggerAppComponent
                 .builder()

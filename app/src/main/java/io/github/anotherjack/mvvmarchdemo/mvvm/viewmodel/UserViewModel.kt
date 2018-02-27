@@ -1,5 +1,6 @@
 package io.github.anotherjack.mvvmarchdemo.mvvm.viewmodel
 
+import android.app.Activity
 import android.app.Application
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.MutableLiveData
@@ -34,14 +35,17 @@ constructor(mModel: UserModel) : ArchViewModel<UserModel>(mModel) {
     @Inject
     lateinit var rxPermissions:RxPermissions
 
+    @Inject
+    lateinit var activity:Activity
+
     init {
-        Log.d("userViewModel ","---------------- init")
+        Log.d("userViewModel ","---------------- init "+this.toString())
 
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate(){
-        Log.d("userVideModel ","------------------- onCreate")
+        Log.d("userVideModel ","------------------- onCreate "+this.toString())
         Log.d("getSomeData ","----------------- "+mModel.getSomeData())
 
         user.value = User("aaa",18,"Beijing")
@@ -59,7 +63,7 @@ constructor(mModel: UserModel) : ArchViewModel<UserModel>(mModel) {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     fun onResume(){
-        Log.d("userVideModel ","------------------- onResume")
+        Log.d("userVideModel ","------------------- onResume "+this.toString())
     }
 
     fun printLog(view:View){

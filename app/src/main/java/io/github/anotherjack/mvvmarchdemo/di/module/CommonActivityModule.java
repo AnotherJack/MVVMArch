@@ -34,4 +34,10 @@ public class CommonActivityModule {
     public RequestManager provideRequestManager(){
         return Glide.with(activity);
     }
+
+    @PerActivity
+    @Provides
+    public Activity provideActivity(){
+        return activity;
+    }
 }
