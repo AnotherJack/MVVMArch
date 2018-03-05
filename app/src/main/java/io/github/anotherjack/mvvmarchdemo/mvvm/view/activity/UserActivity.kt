@@ -1,5 +1,6 @@
 package io.github.anotherjack.mvvmarchdemo.mvvm.view.activity
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
@@ -15,16 +16,16 @@ import io.github.anotherjack.mvvmarchdemo.mvvm.viewmodel.UserViewModel
 
 class UserActivity : BaseActivity<ActivityUserBinding,UserViewModel, UserComponent>() {
 
-    lateinit var loadService:LoadService<Any>
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         mBinding.vm = mViewModel
 
-        loadService = LoadSir.getDefault().register(this)
-        mViewModel.state.observe({lifecycle},{
-            loadService.showCallback(it)
+        val loadService = LoadSir.getDefault().register(this)
+        mViewModel.state.observe(this@UserActivity,object :Observer<Class<*>>{
+            override fun onChanged(t: Class<*>?) {
+                loadService.showCallback(t)
+            }
         })
     }
 

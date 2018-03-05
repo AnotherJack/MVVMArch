@@ -1,1 +1,1 @@
-include ':app', ':mvvmarch', ':mvvmtoolkit'
+include ':app', ':mvvmarch', ':mvvmtoolkit', ':avoidonresult'

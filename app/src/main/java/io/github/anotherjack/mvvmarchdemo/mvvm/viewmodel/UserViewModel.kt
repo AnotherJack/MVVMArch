@@ -1,20 +1,23 @@
 package io.github.anotherjack.mvvmarchdemo.mvvm.viewmodel
 
+import android.app.Activity
 import android.app.Application
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.OnLifecycleEvent
+import android.content.Intent
 import android.util.Log
 import android.view.View
-import com.bumptech.glide.RequestManager
 import com.google.gson.Gson
 import com.kingja.loadsir.callback.SuccessCallback
 import com.tbruyelle.rxpermissions2.RxPermissions
+import io.github.anotherjack.avoidonresult.AvoidOnResult
 import io.github.anotherjack.mvvmarch.di.scope.PerActivity
 import io.github.anotherjack.mvvmarch.mvvm.ArchViewModel
 import io.github.anotherjack.mvvmarchdemo.app.loadsircallback.LoadingCallback
 import io.github.anotherjack.mvvmarchdemo.mvvm.model.UserModel
 import io.github.anotherjack.mvvmarchdemo.mvvm.model.entity.User
+import io.github.anotherjack.mvvmarchdemo.mvvm.view.activity.HobbyActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -29,7 +32,10 @@ class UserViewModel @Inject
 constructor():ArchViewModel<UserModel>(){
     val TAG = "UserViewMode"
     var user:MutableLiveData<User> = MutableLiveData()
+    var hobby:MutableLiveData<String> = MutableLiveData()
     private val mDisposables = CompositeDisposable()
+
+    var initialized = false
 
     @Inject
     lateinit var gson:Gson
@@ -41,7 +47,8 @@ constructor():ArchViewModel<UserModel>(){
     lateinit var rxPermissions:RxPermissions
 
     @Inject
-    lateinit var requestManager:RequestManager
+    lateinit var avoidOnResult:AvoidOnResult
+
 
     val state:MutableLiveData<Class<*>> = MutableLiveData()
 
@@ -54,7 +61,12 @@ constructor():ArchViewModel<UserModel>(){
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate(){
         Log.d(TAG,"------------------- onCreate "+this.toString())
-        loadUser()
+
+        if(!initialized){
+            loadUser()
+        }
+
+        initialized = true //在onCreate最后标志位设为true，防止横竖屏切换时重复加载数据
     }
 
     fun loadUser(){
@@ -85,10 +97,26 @@ constructor():ArchViewModel<UserModel>(){
         Log.d("userVideModel ","------------------- onResume "+this.toString())
     }
 
+    fun getHobby(view: View){
+        avoidOnResult.startForResult(HobbyActivity::class.java,object :AvoidOnResult.Callback{
+            override fun onActivityResult(resultCode: Int, data: Intent?) {
+                if (resultCode == Activity.RESULT_OK) {
+                    hobby.value = data?.getStringExtra("hobby")
+                }
+            }
+
+        })
+    }
+
     fun printLog(view:View){
         Log.d("User ---> ","name:${user.value?.name}\n" +
                 "age:${user.value?.age}\n" +
                 "address:${user.value?.address}")
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        mDisposables.clear()
     }
 
 

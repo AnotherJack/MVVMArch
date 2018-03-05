@@ -8,6 +8,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import dagger.Module;
 import dagger.Provides;
+import io.github.anotherjack.avoidonresult.AvoidOnResult;
 import io.github.anotherjack.mvvmarch.di.scope.PerActivity;
 
 /**
@@ -31,14 +32,13 @@ public class CommonActivityModule {
 
     @PerActivity
     @Provides
-    public RequestManager provideRequestManager(){
-        return Glide.with(activity);
-    }
-
-    @PerActivity
-    @Provides
     public Activity provideActivity(){
         return activity;
     }
 
+    @PerActivity
+    @Provides
+    public AvoidOnResult provideAvoidOnResult(){
+        return new AvoidOnResult(activity);
+    }
 }
