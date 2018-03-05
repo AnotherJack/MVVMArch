@@ -1,6 +1,8 @@
 package io.github.anotherjack.mvvmarchdemo.mvvm.view.activity
 
 import android.os.Bundle
+import com.kingja.loadsir.core.LoadService
+import com.kingja.loadsir.core.LoadSir
 import io.github.anotherjack.mvvmarchdemo.R
 import io.github.anotherjack.mvvmarchdemo.databinding.ActivityUserBinding
 import io.github.anotherjack.mvvmarchdemo.di.component.AppComponent
@@ -13,13 +15,17 @@ import io.github.anotherjack.mvvmarchdemo.mvvm.viewmodel.UserViewModel
 
 class UserActivity : BaseActivity<ActivityUserBinding,UserViewModel, UserComponent>() {
 
-//    @Inject
-//    lateinit var gson:Gson
+    lateinit var loadService:LoadService<Any>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         mBinding.vm = mViewModel
+
+        loadService = LoadSir.getDefault().register(this)
+        mViewModel.state.observe({lifecycle},{
+            loadService.showCallback(it)
+        })
     }
 
     override fun getLayoutId(): Int {

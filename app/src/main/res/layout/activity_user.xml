@@ -28,7 +28,7 @@
 
             <EditText
                 android:id="@+id/name"
-                app:txt="@={vm.user.name}"
+                android:text="@={vm.user.name}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>

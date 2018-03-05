@@ -2,8 +2,10 @@ package io.github.anotherjack.mvvmarchdemo.app;
 
 import android.app.Application;
 
+import com.kingja.loadsir.core.LoadSir;
 import com.squareup.leakcanary.LeakCanary;
 
+import io.github.anotherjack.mvvmarchdemo.app.loadsircallback.LoadingCallback;
 import io.github.anotherjack.mvvmarchdemo.di.component.AppComponent;
 import io.github.anotherjack.mvvmarchdemo.di.component.DaggerAppComponent;
 import io.github.anotherjack.mvvmarchdemo.di.module.AppModule;
@@ -31,6 +33,12 @@ public class MyApp extends Application {
                 .builder()
                 .appModule(new AppModule(this))
                 .build();
+
+        //loadsir 一个多状态视图框架
+        LoadSir.beginBuilder()
+                .addCallback(new LoadingCallback())
+//                .setDefaultCallback(LoadingCallback.class)//设置默认状态页
+                .commit();
     }
 
     public static MyApp getInstance() {
