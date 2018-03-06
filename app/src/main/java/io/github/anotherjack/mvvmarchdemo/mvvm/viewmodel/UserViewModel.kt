@@ -2,9 +2,7 @@ package io.github.anotherjack.mvvmarchdemo.mvvm.viewmodel
 
 import android.app.Activity
 import android.app.Application
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.OnLifecycleEvent
+import android.arch.lifecycle.*
 import android.content.Intent
 import android.util.Log
 import android.view.View
@@ -35,7 +33,7 @@ constructor():ArchViewModel<UserModel>(){
     var hobby:MutableLiveData<String> = MutableLiveData()
     private val mDisposables = CompositeDisposable()
 
-    var initialized = false
+    private var initialized = false
 
     @Inject
     lateinit var gson:Gson
@@ -47,7 +45,11 @@ constructor():ArchViewModel<UserModel>(){
     lateinit var rxPermissions:RxPermissions
 
     @Inject
+    lateinit var holderFragment:HolderFragment
+
+    @Inject
     lateinit var avoidOnResult:AvoidOnResult
+
 
 
     val state:MutableLiveData<Class<*>> = MutableLiveData()
@@ -97,8 +99,12 @@ constructor():ArchViewModel<UserModel>(){
         Log.d("userVideModel ","------------------- onResume "+this.toString())
     }
 
+    val REQUEST_GET_HOBBY = 123
     fun getHobby(view: View){
-        avoidOnResult.startForResult(HobbyActivity::class.java,object :AvoidOnResult.Callback{
+//        val intent = Intent(holderFragment.activity,HobbyActivity::class.java)
+//        holderFragment.activity?.startActivityForResult(intent,REQUEST_GET_HOBBY)
+
+        AvoidOnResult(holderFragment.activity).startForResult(HobbyActivity::class.java,object :AvoidOnResult.Callback{
             override fun onActivityResult(resultCode: Int, data: Intent?) {
                 if (resultCode == Activity.RESULT_OK) {
                     hobby.value = data?.getStringExtra("hobby")
@@ -112,6 +118,11 @@ constructor():ArchViewModel<UserModel>(){
         Log.d("User ---> ","name:${user.value?.name}\n" +
                 "age:${user.value?.age}\n" +
                 "address:${user.value?.address}")
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
+    fun onAny(lifecycleOwner: LifecycleOwner,event: Lifecycle.Event){
+        Log.d(TAG,"-------------onAny")
     }
 
     override fun onCleared() {

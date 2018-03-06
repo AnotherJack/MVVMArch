@@ -1,11 +1,8 @@
 package io.github.anotherjack.mvvmarchdemo.di.module;
 
-import android.app.Activity;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestManager;
+import android.arch.lifecycle.HolderFragment;
+import android.support.v7.app.AppCompatActivity;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-
 import dagger.Module;
 import dagger.Provides;
 import io.github.anotherjack.avoidonresult.AvoidOnResult;
@@ -18,9 +15,9 @@ import io.github.anotherjack.mvvmarch.di.scope.PerActivity;
 
 @Module
 public class CommonActivityModule {
-    private Activity activity;
+    private AppCompatActivity activity;
 
-    public CommonActivityModule(Activity activity) {
+    public CommonActivityModule(AppCompatActivity activity) {
         this.activity = activity;
     }
 
@@ -30,10 +27,22 @@ public class CommonActivityModule {
         return new RxPermissions(activity);
     }
 
+    /**
+     * 不要这样做
+     * 不要为viewmodel提供activity，在屏幕旋转时会导致内存泄漏
+     * 需要activity的话可以为viewmodel注入HolderFragment，并通过HolderFragment的getActivity获得activity
+     * @return
+     */
+//    @PerActivity
+//    @Provides
+//    public Activity provideActivity(){
+//        return activity;
+//    }
+
     @PerActivity
     @Provides
-    public Activity provideActivity(){
-        return activity;
+    public HolderFragment provideHolderFragment(){
+        return HolderFragment.holderFragmentFor(activity);
     }
 
     @PerActivity

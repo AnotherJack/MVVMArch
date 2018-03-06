@@ -27,12 +27,14 @@
                 android:id="@+id/hobby"
                 android:text="@={vm.hobby}"
                 android:layout_width="wrap_content"
+                android:layout_weight="1"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
         <Button
             android:id="@+id/ok"
             android:text="ok"
+            android:onClick="@{vm.goBack}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"

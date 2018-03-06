@@ -1,10 +1,6 @@
 package io.github.anotherjack.mvvmarchdemo.mvvm.view.activity
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import io.github.anotherjack.mvvmarchdemo.R
 import io.github.anotherjack.mvvmarchdemo.databinding.ActivityHobbyBinding
 import io.github.anotherjack.mvvmarchdemo.di.component.AppComponent
@@ -21,12 +17,6 @@ class HobbyActivity :BaseActivity<ActivityHobbyBinding,HobbyViewModel,HobbyCompo
 
         mBinding.vm = mViewModel
 
-        mBinding.ok.setOnClickListener {
-            val intent = Intent()
-            intent.putExtra("hobby",mViewModel.hobby.value)
-            setResult(Activity.RESULT_OK,intent)
-            finish()
-        }
     }
 
     override fun getLayoutId(): Int {
