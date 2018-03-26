@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MVVMArchDemo.iml" filepath="$PROJECT_DIR$/MVVMArchDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MVVMArch.iml" filepath="$PROJECT_DIR$/MVVMArch.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/avoidonresult/avoidonresult.iml" filepath="$PROJECT_DIR$/avoidonresult/avoidonresult.iml" />
       <module fileurl="file://$PROJECT_DIR$/mvvmarch/mvvmarch.iml" filepath="$PROJECT_DIR$/mvvmarch/mvvmarch.iml" />
       <module fileurl="file://$PROJECT_DIR$/mvvmtoolkit/mvvmtoolkit.iml" filepath="$PROJECT_DIR$/mvvmtoolkit/mvvmtoolkit.iml" />
     </modules>
